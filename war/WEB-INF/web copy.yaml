@@ -1,0 +1,7 @@
+application: chem-shell
+version: 1
+runtime: java
+
+handlers:
+- url: /static
+  static_dir: static

@@ -1,0 +1,56 @@
+<html>
+<head>
+<h1> ChemShell </h1>
+<h3> Command-Line Chemistry Utility </h3>
+<h4> Beta 0.1.5 </h4>
+<h4> Jormungandr Software </h4>
+
+<link rel="stylesheet" type="text/css" href= 'static/chem-shell.css' ></link>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script>
+
+function submit(text){
+	text.value = text.value.substring(3,text.value.length);
+	if (allspace(text.value)){
+		print("");
+	} else {
+		execute(text);
+	}
+	text.value = ">> ";
+}
+
+function allspace(text){count=0;for(i=0;i<text.length;i++){if(text.charAt(i)==' '){count++}}return (count==text.length);}
+
+function execute(text){
+	text = text.value;
+	print(">> "+text);
+	$.get('execute',
+	{"command" : text},
+	function(data){print(data);}
+	);
+	return;
+}
+
+function print(text){
+	var element = document.getElementById("shell")
+	element.innerHTML+=text+"<BR>";
+	return;
+}
+
+</script>
+</head>
+
+<body>
+
+<p id = shell></p><!--Gets expanded with past shell queries-->
+
+<script> function def(){return "Enter Commands Here - (type 'help' for help)";} </script>
+
+<input type = "text" name = "command" value = "Enter Commands Here - (type 'help' for help)"
+onkeydown="if (event.keyCode == 13) {submit(this)}"
+id = "text_field" size = 75
+onfocus="if(this.value==def()){this.value = '>> '}"></input>
+
+</body?
+</html>
